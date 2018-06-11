@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    	<meta name="screen-orientation"content="portrait" />
+    	<meta name="x5-orientation"content="portrait" />
+		<title>钱包地址绑定</title>
+		<link rel="stylesheet" href="css/reset.css" />
+    	<link rel="stylesheet" href="css/index.css" />
+    	<link rel="stylesheet" href="css/alert_.css" />
+		<style>
+			.alert{
+				z-index: 99999;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="commonHeadPic textCenter">
+			<div class="absoBox" id="picBox">
+				<img src="img/logo_header.png" >
+					<p class="colorWhite smallText" style="margin-top: 1rem;width: 100%;">宏达链(HDA)——创造娱乐行业支付新模式。HDA陪您玩转高端娱乐场所，宏达在手，引爆全球</p>
+			</div>
+		</div>
+		<div class="clearfix HDANumBox textCenter">
+			<div class="left">
+				<p class="midText">HDA代币数</p>
+				<p class="colorBlue bigText" id="num"></p>
+				<p class="colorFont mismText">枚</p>
+				
+			</div>
+			<div class="right">
+				<p class="midText">邀请人数</p>
+				<p class="colorBlue bigText" id="shareNum"></p>
+				<p class="colorFont mismText">人</p>
+			</div>
+			
+		</div>
+		<div class="DSCBBox">
+			<div class="commonContainer">
+				<p class="smallText" style="margin-top: 1rem;margin-bottom: 1rem;">
+					绑定钱包地址
+				</p>
+				
+				<div class="copyVer">
+					<div class="smallText" id="ethAddr" style="background: rgba(242, 242, 242, 1);width: 80%;padding-left: 0;"></div>
+					<button class="colorWhite txBtn" onclick="txSubmit()">提现</button>
+				</div>
+				
+				<p class="smallText" style="margin-top: 1rem;margin-bottom: 1rem;">
+					您的邀请链接
+				</p>
+				<!--<input class="ethInput" readonly="readonly" id="shareUrl" >-->
+				<div class="copyVer">
+					<p class="smallText" id="shareUrl" style="background: rgba(242, 242, 242, 1);width: 100%;line-height: 2.5rem; height: 2.5rem;overflow: hidden;padding-left: 0;"></p>
+					
+				</div>
+				<button class="btnBigSize commonBtn colorWhite" id="cope_btn">点击复制</button>
+				
+				<div class="smallText" style="margin-top: 2rem;">
+     				
+     				<p style="margin-bottom: 1rem;">活动规则</p>
+					<p class="colorFont" style="margin-bottom: 0.5rem;">1、成功发送验证码进行激活操作即可获得<span class="colorBlue midText bold">888</span>枚HDA代币奖励;</p>
+					<p class="colorBlue" style="margin-bottom: 0.5rem;">2、每邀请1名好友领取，可再额外获得<span class="midText bold">200</span>枚代币奖励;</p>
+					<p class="colorFont" style="margin-bottom: 0.5rem;">3、本次空投活动每个用户代币奖励上限为1888枚;</p>
+					<p class="colorFont" style="margin-bottom: 1rem;">4、代币实时到账至「空投助手」系统内，并将于<span class="colorBlue">7月15日</span>之前自动空投至您绑定的钱包地址;</p>
+					
+    			</div>
+			</div>
+			<div class="noticeHeavy ">
+				<p>郑重声明</p>
+				<p class="colorFont smallText">此活动是“"HDA项目方”为了增加项目知名度而联合「空投助手」一起发起的免费空投糖果活动，是一种市场营销行为。</p>
+				<p class="colorFont smallText">官方在现在及未来都不会以任何名义收取任何费用，目前市面上其它以空投HDA为名义进行敛财、收费和集资等均是非官方的欺诈行为，所有空投代币均为免费发放，请各位周知。</p>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript" src="js/jquery-1.10.1.min.js" ></script>
+		<script type="text/javascript" src="js/alert.js" ></script>
+		<script type="text/javascript" src="js/clipboard.min.js" ></script>
+		<script>
+			if(!sessionStorage.getItem('vip_no')){
+				alert_("未登录！")
+				setTimeout(function(){
+					window.location.href = "login.html";
+				},1000)
+			}
+			
+			
+			var vipNo = sessionStorage.getItem('vip_no')
+			var parm = {
+				vipNo: vipNo
+			}
+			
+			$.ajax({
+					type:"post",
+					url: ajax_url() + "user/getUserDetailData",
+					async:true,
+					timeout:4000,
+					data: parm,
+					dataType: "json",
+					success: function(data){
+						console.log(data)
+						if(data.code == "200"){
+							$("#shareUrl").html(data.data.shareUrl)
+							$("#num").html(data.data.num)
+							$("#shareNum").html(data.data.shareNum)
+							$("#ethAddr").html(data.data.ethAddr)
+						}
+					}
+				})
+			
+			
+			var clipboard = new Clipboard('#cope_btn', {
+				target: function () {
+					return document.querySelector('#shareUrl');
+				}
+			});
+						
+			clipboard.on('success', function (e) {
+				alert_("复制成功")
+				
+			});
+						
+			clipboard.on('error', function (e) {
+				alert_("复制成功!")
+			});
+			
+			
+			function txSubmit(){
+				$(".txBtn").attr("disabled","disabled")
+				var vipNo = sessionStorage.getItem('vip_no')
+				var parm = {
+					vipNo: vipNo
+				}
+				$.ajax({
+					type:"post",
+					url: ajax_url() + "user/withdrawCash",
+					async:true,
+					timeout:4000,
+					data: parm,
+					dataType: "json",
+					success: function(data){
+						console.log(data)
+						if(data.code == "200"){
+							alert_(data.msg)
+							setTimeout(function(){
+								window.location.reload()
+							},1000)
+						}else {
+							alert_(data.msg)
+							$(".submitBtn").removeAttr("disabled")
+						}
+					}
+				})
+			}
+		</script>
+	</body>
+</html>

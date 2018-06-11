@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    	<meta name="screen-orientation"content="portrait" />
+    	<meta name="x5-orientation"content="portrait" />
+		<title>登陆</title>
+		<link rel="stylesheet" href="css/reset.css" />
+    	<link rel="stylesheet" href="css/index.css" />
+    	<link rel="stylesheet" href="css/alert_.css" />
+		<style>
+			
+		</style>
+	</head>
+	<body>
+
+		<div class="commonHeadPic loginHeadPic textCenter">
+			<div class="absoBox" id="picBox">
+				<img src="img/Logo.png"  width="85%">
+			</div>
+		</div>
+		<div class="commonContainer" style="margin-top: 1rem;" id="contentBox">
+			<div class="formBox">
+				<div class="inputBox">
+					<div class="inputBoxCell ">
+						<label>手机号</label>
+						<input class="" type="text" id="phone" placeholder="请输入手机号" />
+						<input type="button"  onclick="settime(this)" style="font-size:0.8rem;" class=" codeBtn  btn_Code" value="获取验证码" >
+					</div>
+					<div class="inputBoxCell clearfix">
+						<label>验证码</label>
+						<input  type="text" id="veriCode" placeholder="请输入验证码"/>
+					</div>
+				</div>
+				<button class="commonBtn btnBigSize colorWhite textCenter login_btn" style="margin-top: 3rem;" onclick="loginByPhone()">登陆</button>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript" src="js/jquery-1.10.1.min.js" ></script>
+		<script type="text/javascript" src="js/alert.js" ></script>
+		<script>
+		$(".btn_Code").get(0).addEventListener("click",function(e){
+			get_code()
+		})
+		var countdown=30; 
+		function settime(obj) { 
+			if (countdown == 0) { 
+				$(obj).removeAttr("disabled"); 
+				$(obj).val("获取验证码"); 
+				countdown = 30; 
+				return;
+			} else { 
+				$(obj).attr("disabled", "disabled"); 
+				$(obj).val(countdown+"s后发送"); 
+				countdown--; 
+			} 
+			setTimeout(function() { 
+				settime(obj) 
+			},1000) 
+		}
+		
+		/*获取验证码*/
+		function get_code(){
+			var phone = $("#phone").val();
+			if(!phone){
+				alert_("请输入手机号码！");
+				countdown = 0;
+				return
+			}
+			if(!reg_phone(phone)){
+				countdown = 0;
+				return 
+			}
+			var parm = {
+				phone: phone
+			}
+			$.ajax({
+				type:"post",
+				url: ajax_url()+"user/sendSms",
+				async:true,
+				data: parm,
+				success:function(data){
+				console.log(data)
+//					var data = eval("("+data+")")
+					if(data.code == '0000'){
+							alert_(data.msg);
+						}else{
+							alert_(data.error);
+						}
+				}
+			});
+		}
+		function loginByPhone(){
+			var search = location.search;
+			var invite = ''
+			if(search){
+				var arr = [];
+				search = search.substring(1);
+				arr = search.split("=");
+				/*获取invite*/
+				invite = arr[1];
+			}
+			var phone = $("#phone").val();
+			var veriCode = $("#veriCode").val();
+				
+				$(".login_btn").attr("disabled","disabled");
+				
+				if(!phone){
+					alert_("请输入手机号码！")
+					$(".login_btn").removeAttr("disabled");
+					return false;
+				}
+				if(!veriCode){
+					alert_("请输入密码！")
+					$(".login_btn").removeAttr("disabled");
+					return false;
+				}
+				var parm = {
+					phone: phone,
+					verCode: veriCode,
+					invite: invite
+				}
+				$.ajax({
+					type:"post",
+					url: ajax_url() + "user/login",
+					async:true,
+					timeout:4000,
+					data: parm,
+					dataType: "json",
+					success: function(data){
+						console.log(data)
+						if(data.code == '200'){
+							sessionStorage.setItem('vip_no',data.data.user.vip_no)
+							sessionStorage.setItem('shareCode',data.data.user.shareCode)
+							sessionStorage.setItem('eth_addr',data.data.user.eth_addr)
+							sessionStorage.setItem('shareNum',data.data.user.shareNum)
+							if(!data.data.isBind){
+								setTimeout(function(){
+									window.location.href = 'index.html'
+								},1000)
+								
+							}else {
+								setTimeout(function(){
+									window.location.href = 'shareLink.html'
+								},1000)
+							}	
+						}else{
+							$(".login_btn").removeAttr("disabled");
+							alert_(data.msg)
+						} 
+						
+					}
+				})
+			}
+			
+		</script>
+	</body>
+</html>

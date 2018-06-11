@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    	<meta name="screen-orientation"content="portrait" />
+    	<meta name="x5-orientation"content="portrait" />
+		<title>钱包地址绑定</title>
+		<link rel="stylesheet" href="css/reset.css" />
+    	<link rel="stylesheet" href="css/index.css" />
+    	<link rel="stylesheet" href="css/alert_.css" />
+		<style>
+			
+		</style>
+	</head>
+	<body>
+
+		<div class="commonHeadPic textCenter">
+			<div class="absoBox" id="picBox">
+				<img src="img/logo_header.png" >
+					<p class="colorWhite smallText" style="margin-top: 1rem;width: 100%;">宏达链(HDA)——创造娱乐行业支付新模式。HDA陪您玩转高端娱乐场所，宏达在手，引爆全球</p>
+			</div>
+		</div>
+		<div class="DSCBBox">
+			<div class="commonContainer">
+				<p class="textCenter midText" style="margin-top: 1rem;margin-bottom: 1rem;">
+					请填写以太坊钱包地址免费领取
+					<span class="bigText" style="color: #2e88bd;text-decoration: underline;font-weight: 600;">888</span>
+					个 HDA
+				</p>
+				<input class="ethInput mismText" id="ethAdress" placeholder="请输入您的以太坊钱包地址">
+				<p class="colorFont" style="margin-bottom: 1rem;">1、请勿使用任何交易平台钱包地址，需使用您自己掌握私钥的ERC20钱包地址，如imtoken</p>
+				<p class="colorFont" style="margin-bottom: 1rem;">2、钱包地址填写后不支持更改，请确认好填写的钱包地址信息准确</p>
+				<p class="colorFont" style="margin-bottom: 1rem;">3、此活动是“HDA项目方”为了增加项目知名度而联合“空投助手”一起发起的免费空投糖果活动，无任何收费行为</p>
+				<button class="btnBigSize commonBtn colorWhite submitBtn" onclick="submit()">提交</button>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript" src="js/jquery-1.10.1.min.js" ></script>
+		<script type="text/javascript" src="js/alert.js" ></script>
+		<script>
+			if(!sessionStorage.getItem('vip_no')){
+				alert_("未登录！")
+				setTimeout(function(){
+					window.location.href = "login.html";
+				},1000)
+			}
+			
+			
+			function submit(){
+				$(".submitBtn").attr("disabled","disabled")
+				var ethAddr = $("#ethAdress").val()
+				var vipNo = sessionStorage.getItem('vip_no')
+				var reg = /^[A-Za-z0-9]+$/
+				if(!ethAddr){
+					alert_("请输入以太坊钱包地址！")
+					$(".submitBtn").removeAttr("disabled")
+					return false;
+				}else if(!reg.test(ethAddr)){
+					alert_("以太坊钱包地址不正确")
+					$(".submitBtn").removeAttr("disabled")
+					return false;
+				}
+				var parm = {
+					vipNo: vipNo,
+					ethAddr: ethAddr
+				}
+				$.ajax({
+					type:"post",
+					url: ajax_url() + "user/bindEthAddr",
+					async:true,
+					timeout:4000,
+					data: parm,
+					dataType: "json",
+					success: function(data){
+						console.log(data)
+						if(data.code == "200"){
+							alert_(data.msg)
+							setTimeout(function(){
+								window.location.href = "copyAdress.html"
+							},1000)
+						}else {
+							alert_(data.msg)
+							$(".submitBtn").removeAttr("disabled")
+						}
+					}
+				})	
+			}
+		</script>
+	</body>
+</html>
