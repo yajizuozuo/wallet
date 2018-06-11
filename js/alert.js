@@ -17,7 +17,9 @@ function reg_phone(num){
 
 
 function ajax_url(){
-	var url = "http://192.168.0.86:8080/adminManage/"
+//	var url = "http://192.168.0.86:8080/adminManage/"
+	var url = "http://hou.ganleyuan.net/"
+
 	return url
 }
 
