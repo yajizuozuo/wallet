@@ -1,122 +1,124 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    	<meta name="screen-orientation"content="portrait" />
-    	<meta name="x5-orientation"content="portrait" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="x5-orientation" content="portrait" />
 		<title>钱包地址绑定</title>
 		<link rel="stylesheet" href="css/reset.css" />
-    	<link rel="stylesheet" href="css/index.css" />
-    	<link rel="stylesheet" href="css/alert_.css" />
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="css/alert_.css" />
 		<style>
-			
+
 		</style>
 	</head>
+
 	<body>
 
 		<div class="commonHeadPic textCenter">
 			<div class="absoBox" id="picBox">
-				<img src="img/logo_header.png" >
-					<p class="colorWhite smallText" style="margin-top: 1rem;width: 100%;">Traxia，作为Cardaon的首个应用侧链，主要服务于供应链金融系统，通过智能合约及企业资产证券化的方式，提高企业资产流动性，从而提高企业资金流动性。</p>
+				<img src="img/logo_header.png">
+				<p class="colorWhite smallText" style="margin-top: 1rem;width: 100%;">Traxia，作为Cardaon的首个应用侧链，主要服务于供应链金融系统，通过智能合约及企业资产证券化的方式，提高企业资产流动性，从而提高企业资金流动性。</p>
 			</div>
 		</div>
 		<div class="DSCBBox" style="padding-top: 0;">
 			<div class="commonContainer">
-				<p class="smallText" style="margin-top: 1rem;margin-bottom: 1rem;">
-					注意：钱包地址已绑定成功，请务必完成以下两个步骤才可成功领取HDA代币
+				<p class="mismText" style="margin-top: 1rem;margin-bottom: 1rem;line-height: 1.5rem;">
+					<span style="width: 1rem;font-weight: 700;
+    height: 1rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    display: inline-block;
+    line-height: 1rem;
+    text-align: center;
+    margin-right: 0.3rem;">!</span>注意：钱包地址已绑定成功，请务必完成以下两个步骤才可成功领取TMT代币
 				</p>
 				<p>
 					<span class="spanTips">第一步</span>
 					<span class="stepTips">复制以下验证码</span>
 				</p>
 				<div class="copyVer">
-					<div id="url_address"  style="width: 65%;"></div>
+					<div id="url_address" style="width: 65%;"></div>
 					<span>|</span>
 					<div class="" id="cope_btn">点击复制</div>
 					<!--<input class="ethInput mismText" placeholder="请输入您的以太坊钱包地址">-->
 				</div>
-				
+
 				<p style="margin-bottom: 1rem;">
 					<span class="spanTips">第二步</span>
 					<span class="stepTips">发送验证码至「空投助手」</span>
 				</p>
-				
+
 				<button class="btnBigSize commonBtn colorWhite" id="submit">前往发送验证码</button>
-				
+
 				<p style="margin-top: 2rem;font-size: 0.6rem;color: #ccc;">
-     				HDA空投奖励将会在发送验证码之后实时到账至「空投助手」系统内，可随时申请提现，申请后将于7月15日之前空投至您绑定的钱包地址
-    			</p>
+					TMT空投奖励将会在发送验证码之后实时到账至「空投助手」系统内，可随时申请提现，申请后将于7月15日之前空投至您绑定的钱包地址
+				</p>
 			</div>
 		</div>
-		
+
 		<div class="com-pop" style="display: none;">
-			<div class="com-pop-mask"></div> 
+			<div class="com-pop-mask"></div>
 			<div class="com-pop-box">
 				<div class="com-pop-box-close">
 					<img src="img/close.png" />
-				</div> 
+				</div>
 				<div class="com-pop-box-title">
-					<div>领取代币（2/2）</div>
-				</div> 
+					<div class="midText">领取代币（2/2）</div>
+				</div>
 				<div class="com-pop-box-content">
-					<div class="intro">
-						<div style="line-height: 1.2rem;">关注公众号“<span>空投助手</span>”<br>发送验证码</div>
-					</div>  
+					<div class="intro mismText">
+						<div style="line-height: 1.2rem;font-size: 0.8rem;">关注公众号“<span>空投助手</span>”<br>发送验证码</div>
+					</div>
 					<div class="com-pop-box-content-ecode">
 						<div class="img-wrapper">
-							<img src="http://redirect.airdropin.com/img/shujudun.jpg" class="img">
-						</div> 
+							<img src="img/erweima.jpg" class="img">
+						</div>
 						<div class="bg">
-						</div> 
-						<div class="desc">可长按二维码识别关注</div>
+						</div>
+						<div class="desc mismText">可长按二维码识别关注</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript" src="js/jquery-1.10.1.min.js" ></script>
-		<script type="text/javascript" src="js/alert.js" ></script>
+		<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+		<script type="text/javascript" src="js/alert.js"></script>
 		<script src="js/clipboard.min.js"></script>
 		<script>
-			if(!sessionStorage.getItem('vip_no')){
+			if(!sessionStorage.getItem('vip_no')) {
 				alert_("未登录！")
-				setTimeout(function(){
+				setTimeout(function() {
 					window.location.href = "login.html";
-				},1000)
+				}, 1000)
 			}
-			
-			
+
 			$("#url_address").html(sessionStorage.getItem('shareCode'))
-			
-			
-			$("#submit").click(function(){
+
+			$("#submit").click(function() {
 				$(".com-pop").addClass('show').show()
 			})
-			$(".com-pop-box-close").click(function(){
+			$(".com-pop-box-close").click(function() {
 				$(".com-pop").removeClass('show').hide()
 			})
-			
+
 			var clipboard = new Clipboard('#cope_btn', {
-				target: function () {
+				target: function() {
 					return document.querySelector('#url_address');
 				}
 			});
-						
-			clipboard.on('success', function (e) {
-				alert_("复制成功")
-				setTimeout(function(){
-					$(".com-pop").addClass('show').show()
-				},300)
-				
+
+			clipboard.on('success', function(e) {
+				alert_("复制成功",closeTip,showPop)
 			});
-						
-			clipboard.on('error', function (e) {
+
+			clipboard.on('error', function(e) {
 				alert_("复制成功!")
-				setTimeout(function(){
-					$(".com-pop").addClass('show').show()
-				},300)
-				
+
 			});
 		</script>
 	</body>
+
 </html>

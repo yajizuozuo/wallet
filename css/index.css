@@ -458,7 +458,7 @@ button.commonBtn{
 	height: 2rem;
 	text-align: center;
 	line-height: 2rem;
-	font-size: 0.6rem;
+	font-size: 0.8rem;
 }
 .stepTips{
 	height: 2rem;
@@ -680,7 +680,7 @@ button.commonBtn{
 }
 
 .com-pop-box-content .intro {
-    font-size: .37333rem;
+    font-size: 0.6rem;
     line-height: .64rem;
     text-align: center;
     padding: .26667rem 0 0;
@@ -727,7 +727,7 @@ button.commonBtn{
 }
 
 .com-pop-box-content-ecode .desc {
-    font-size: .37333rem;
+    font-size: 0.8rem;
     letter-spacing: .13333rem;
     line-height: .64rem;
     margin: .8rem 0 0;

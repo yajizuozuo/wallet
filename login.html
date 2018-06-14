@@ -17,7 +17,7 @@
 
 		<div class="commonHeadPic loginHeadPic textCenter">
 			<div class="absoBox" id="picBox" style="width: 50%;">
-				<img src="img/Logo.png"  width="80%">
+				<img src="img/Logo.png"  onclick="return false" width="80%">
 			</div>
 		</div>
 		<div class="commonContainer" style="margin-top: 1rem;" id="contentBox">
@@ -37,6 +37,7 @@
 			</div>
 		</div>
 		
+	
 		
 		<script type="text/javascript" src="js/jquery-1.10.1.min.js" ></script>
 		<script type="text/javascript" src="js/alert.js" ></script>
@@ -85,9 +86,11 @@
 				console.log(data)
 //					var data = eval("("+data+")")
 					if(data.code == '0000'){
-							alert_(data.msg);
+//							alert_(data.msg);
+							
 						}else{
 							alert_(data.error);
+							
 						}
 				}
 			});

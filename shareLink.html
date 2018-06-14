@@ -10,7 +10,7 @@
     	<link rel="stylesheet" href="css/index.css" />
     	<link rel="stylesheet" href="css/alert_.css" />
 		<style>
-			.alert{
+			.bwui-dialog{
 				z-index: 99999;
 			}
 		</style>
@@ -25,7 +25,7 @@
 		</div>
 		<div class="clearfix HDANumBox textCenter">
 			<div class="left">
-				<p class="midText">HDA代币数</p>
+				<p class="midText">TMT代币数</p>
 				<p class="colorBlue bigText" id="num"></p>
 				<p class="colorFont mismText">枚</p>
 				
@@ -39,7 +39,7 @@
 		</div>
 		<div class="DSCBBox">
 			<div class="commonContainer">
-				<p class="smallText" style="margin-top: 1rem;margin-bottom: 1rem;">
+				<p class="mismText" style="margin-top: 1rem;margin-bottom: 1rem;">
 					绑定钱包地址
 				</p>
 				
@@ -48,20 +48,19 @@
 					<button class="colorWhite txBtn" onclick="txSubmit()">提现</button>
 				</div>
 				
-				<p class="smallText" style="margin-top: 1rem;margin-bottom: 1rem;">
+				<p class="mismText" style="margin-top: 1rem;margin-bottom: 1rem;">
 					您的邀请链接
 				</p>
-				<!--<input class="ethInput" readonly="readonly" id="shareUrl" >-->
 				<div class="copyVer">
 					<p class="smallText" id="shareUrl" style="background: rgba(242, 242, 242, 1);width: 100%;line-height: 2.5rem; height: 2.5rem;overflow: hidden;padding-left: 0;"></p>
 					
 				</div>
 				<button class="btnBigSize commonBtn colorWhite" id="cope_btn">点击复制</button>
 				
-				<div class="smallText" style="margin-top: 2rem;">
+				<div class="mismText" style="margin-top: 2rem;">
      				
      				<p style="margin-bottom: 1rem;">活动规则</p>
-					<p class="colorFont" style="margin-bottom: 0.5rem;">1、成功发送验证码进行激活操作即可获得<span class="colorBlue midText bold">888</span>枚HDA代币奖励;</p>
+					<p class="colorFont" style="margin-bottom: 0.5rem;">1、成功发送验证码进行激活操作即可获得<span class="colorBlue midText bold">888</span>枚TMT代币奖励;</p>
 					<p class="colorBlue" style="margin-bottom: 0.5rem;">2、每邀请1名好友领取，可再额外获得<span class="midText bold">200</span>枚代币奖励;</p>
 					<p class="colorFont" style="margin-bottom: 0.5rem;">3、本次空投活动每个用户代币奖励上限为1888枚;</p>
 					<p class="colorFont" style="margin-bottom: 1rem;">4、代币实时到账至「空投助手」系统内，并将于<span class="colorBlue">7月15日</span>之前自动空投至您绑定的钱包地址;</p>
@@ -70,8 +69,8 @@
 			</div>
 			<div class="noticeHeavy ">
 				<p>郑重声明</p>
-				<p class="colorFont smallText">此活动是“"HDA项目方”为了增加项目知名度而联合「空投助手」一起发起的免费空投糖果活动，是一种市场营销行为。</p>
-				<p class="colorFont smallText">官方在现在及未来都不会以任何名义收取任何费用，目前市面上其它以空投HDA为名义进行敛财、收费和集资等均是非官方的欺诈行为，所有空投代币均为免费发放，请各位周知。</p>
+				<p class="colorFont mismText">此活动是“"TMT项目方”为了增加项目知名度而联合「空投助手」一起发起的免费空投糖果活动，是一种市场营销行为。</p>
+				<p class="colorFont mismText">官方在现在及未来都不会以任何名义收取任何费用，目前市面上其它以空投TMT为名义进行敛财、收费和集资等均是非官方的欺诈行为，所有空投代币均为免费发放，请各位周知。</p>
 			</div>
 		</div>
 		
@@ -80,12 +79,12 @@
 		<script type="text/javascript" src="js/alert.js" ></script>
 		<script type="text/javascript" src="js/clipboard.min.js" ></script>
 		<script>
-			if(!sessionStorage.getItem('vip_no')){
-				alert_("未登录！")
-				setTimeout(function(){
-					window.location.href = "login.html";
-				},1000)
-			}
+//			if(!sessionStorage.getItem('vip_no')){
+//				alert_("未登录！")
+//				setTimeout(function(){
+//					window.location.href = "login.html";
+//				},1000)
+//			}
 			
 			
 			var vipNo = sessionStorage.getItem('vip_no')
@@ -107,25 +106,23 @@
 							$("#num").html(data.data.num)
 							$("#shareNum").html(data.data.shareNum)
 							$("#ethAddr").html(data.data.ethAddr)
+							var clipboard = new Clipboard('#cope_btn', {
+								text: function() {
+						            return data.data.shareUrl
+						        }
+							});
+										
+							clipboard.on('success', function (e) {
+								alert_("复制成功")
+								
+							});
+										
+							clipboard.on('error', function (e) {
+								alert_("复制成功!")
+							});
 						}
 					}
 				})
-			
-			
-			var clipboard = new Clipboard('#cope_btn', {
-				target: function () {
-					return document.querySelector('#shareUrl');
-				}
-			});
-						
-			clipboard.on('success', function (e) {
-				alert_("复制成功")
-				
-			});
-						
-			clipboard.on('error', function (e) {
-				alert_("复制成功!")
-			});
 			
 			
 			function txSubmit(){
@@ -145,9 +142,6 @@
 						console.log(data)
 						if(data.code == "200"){
 							alert_(data.msg)
-							setTimeout(function(){
-								window.location.reload()
-							},1000)
 						}else {
 							alert_(data.msg)
 							$(".submitBtn").removeAttr("disabled")

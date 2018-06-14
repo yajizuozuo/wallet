@@ -1,5 +1,150 @@
-.alert {
+.bwui-dialog, .bwui-dialog-mask {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.bwui-dialog {
+    position: fixed;
+    z-index: 100;
+}
+.bwui-dialog-mask {
+    opacity: 1;
+    animation: bwui-dialog-mask-show .25s forwards;
+}
+
+.bwui-dialog-mask {
+    position: absolute;
+    z-index: 1;
+    background: rgba(25,25,25,.7);
+    opacity: 1;
+}
+
+@keysframes bwui-dialog-mask-show{
+	100%{
+		opacity: 1;
+	}
+}
+
+
+.bwui-dialog-box {
+    transform: translate3d(-50%,-40%,0);
+    opacity: 1;
+    animation: bwui-dialog-box-show .6s .25s cubic-bezier(0,.47,.45,1.15) forwards;
+}
+
+.bwui-dialog-box {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    width: 75%;
+    background: #fff;
+    border-radius: .08rem;
+    transform: translate3d(-50%,-50%,0);
+}
+@keysframes bwui-dialog-box-show{
+	25% {
+    opacity: 1;
+	}
+	
+	100% {
+	    opacity: 1;
+	    transform: translate3d(-50%,-50%,0);
+	}
+}
+
+.page-for-hda .bwui-dialog-box-title {
+    color: #21313f;
+}
+.bwui-dialog-box-content, .bwui-dialog-box-title {
+    line-height: 1.5;
+    margin: 0 1.06667rem;
+    text-align: center;
+}
+.bwui-dialog-box-title {
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: .53333rem 0 0;
+}
+.page-for-hda .bwui-dialog-box-content {
+    color: gray;
+}
+.bwui-dialog-box-content {
+    font-size: 0.8rem;
+    padding: 0.5rem 0 0;
+    word-break: break-all;
+}
+.bwui-dialog-box-footer {
+    position: relative;
+    z-index: 1;
+    margin: .53333rem .53333rem 0;
+    display: flex;
+    align-items: center;
+}
+.bwui-dialog-box-footer:before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: .02667rem;
+    background: #dcdcdc;
+    transform-origin: 0 100%;
+    transform: scaleY(.5);
+}
+.bwui-dialog-box-footer .button {
+    color: #4fafe0;
+}
+.bwui-dialog-box-footer .button {
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem 0;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.divFixBox{
 	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+.fadeBox{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(25,25,25,0.7);
+}
+.alert {
+	position: absolute;
 	left: 50%;
 	top: 30%;
 	width: 60%;

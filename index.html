@@ -25,13 +25,13 @@
 				<p class="textCenter midText" style="margin-top: 1rem;margin-bottom: 1rem;">
 					请填写以太坊钱包地址免费领取
 					<span class="bigText" style="color: #2e88bd;text-decoration: underline;font-weight: 600;">888</span>
-					个 HDA
+					个 TMT
 				</p>
 				<input class="ethInput mismText" id="ethAdress" placeholder="请输入您的以太坊钱包地址">
-				<p class="colorFont" style="margin-bottom: 1rem;">1、请勿使用任何交易平台钱包地址，需使用您自己掌握私钥的ERC20钱包地址，如imtoken</p>
-				<p class="colorFont" style="margin-bottom: 1rem;">2、钱包地址填写后不支持更改，请确认好填写的钱包地址信息准确</p>
-				<p class="colorFont" style="margin-bottom: 1rem;">3、此活动是“HDA项目方”为了增加项目知名度而联合“空投助手”一起发起的免费空投糖果活动，无任何收费行为</p>
-				<button class="btnBigSize commonBtn colorWhite submitBtn" onclick="submit()">提交</button>
+				<p class="colorFont mismText" style="margin-bottom: 1rem;">1、请勿使用任何交易平台钱包地址，需使用您自己掌握私钥的ERC20钱包地址，如imtoken</p>
+				<p class="colorFont mismText" style="margin-bottom: 1rem;">2、钱包地址填写后不支持更改，请确认好填写的钱包地址信息准确</p>
+				<p class="colorFont mismText" style="margin-bottom: 1rem;">3、此活动是“TMT项目方”为了增加项目知名度而联合“空投助手”一起发起的免费空投糖果活动，无任何收费行为</p>
+				<button class="btnBigSize commonBtn colorWhite submitBtn upText" onclick="submit()">提交</button>
 			</div>
 		</div>
 		
@@ -75,7 +75,7 @@
 					success: function(data){
 						console.log(data)
 						if(data.code == "200"){
-							alert_(data.msg)
+//							alert_(data.msg)
 							setTimeout(function(){
 								window.location.href = "copyAdress.html"
 							},1000)
