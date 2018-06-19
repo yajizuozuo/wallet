@@ -1,5 +1,5 @@
 //手机端弹窗样式
-function alert_(title,callback,fn) {
+function alert_(title,fn) {
 	$(".bwui-dialog").remove();
 	var cHtml = "";
 //	cHtml = "<div class='alert fade'> " + title + "</div>";
@@ -11,7 +11,7 @@ function alert_(title,callback,fn) {
 		cHtml += 			'<div> '+ title + '</div>'
 		cHtml += 		'</div> '
 		cHtml += 		'<div class="bwui-dialog-box-footer">'
-		cHtml += 		'<div class="button submit" onclick="'+ callback(fn) +'">知道了</div>'
+		cHtml += 		'<div class="button submit" onclick="closeFix()">知道了</div>'
 		cHtml += 		'</div></div></div>'
 			
 	$("body").append(cHtml);
@@ -30,16 +30,11 @@ function reg_phone(num){
 function ajax_url(){
 //	var url = "http://192.168.0.86:8080/adminManage/"
 	var url = "http://hou.ganleyuan.net/"
+
 	return url
 }
 
-function closeTip(closeFix){
+function closeFix(fn){
 	$('.bwui-dialog').hide()
-	if(closeFix){
-		closeFix()
-	}
-}
 
-function showPop(){
-	$(".com-pop").addClass('show').show()
 }

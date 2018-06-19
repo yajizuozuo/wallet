@@ -6,7 +6,7 @@
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta name="screen-orientation" content="portrait" />
 		<meta name="x5-orientation" content="portrait" />
-		<title>钱包地址绑定</title>
+		<title>交易所账号绑定</title>
 		<link rel="stylesheet" href="css/reset.css" />
 		<link rel="stylesheet" href="css/index.css" />
 		<link rel="stylesheet" href="css/alert_.css" />
@@ -34,28 +34,28 @@
     display: inline-block;
     line-height: 1rem;
     text-align: center;
-    margin-right: 0.3rem;">!</span>注意：钱包地址已绑定成功，请务必完成以下两个步骤才可成功领取TMT代币
+    margin-right: 0.3rem;">!</span>注意：交易所账号已绑定成功，请务必完成以下两个步骤才可成功领取TMT代币
 				</p>
 				<p>
 					<span class="spanTips">第一步</span>
-					<span class="stepTips">复制以下验证码</span>
+					<span class="stepTips">复制以下口令</span>
 				</p>
 				<div class="copyVer">
-					<div id="url_address" style="width: 65%;"></div>
+					<div id="url_div" style="width: 65%;"></div>
+					<div style="opacity: 0;position: absolute;top: 30px;"  id="url_address"></div>
 					<span>|</span>
 					<div class="" id="cope_btn">点击复制</div>
-					<!--<input class="ethInput mismText" placeholder="请输入您的以太坊钱包地址">-->
 				</div>
 
 				<p style="margin-bottom: 1rem;">
 					<span class="spanTips">第二步</span>
-					<span class="stepTips">发送验证码至「空投助手」</span>
+					<span class="stepTips">发送口令到TMT官方社群</span>
 				</p>
 
-				<button class="btnBigSize commonBtn colorWhite" id="submit">前往发送验证码</button>
+				<button class="btnBigSize commonBtn colorWhite" id="submit">前往发送口令</button>
 
 				<p style="margin-top: 2rem;font-size: 0.6rem;color: #ccc;">
-					TMT空投奖励将会在发送验证码之后实时到账至「空投助手」系统内，可随时申请提现，申请后将于7月15日之前空投至您绑定的钱包地址
+					TMT空投奖励将会在发送口令之后实时到账至「asbtc」系统内
 				</p>
 			</div>
 		</div>
@@ -71,15 +71,15 @@
 				</div>
 				<div class="com-pop-box-content">
 					<div class="intro mismText">
-						<div style="line-height: 1.2rem;font-size: 0.8rem;">关注公众号“<span>空投助手</span>”<br>发送验证码</div>
+						<div style="line-height: 1.2rem;font-size: 0.8rem;">添加官方社群小秘<br>发送口令</div>
 					</div>
 					<div class="com-pop-box-content-ecode">
 						<div class="img-wrapper">
-							<img src="img/erweima.jpg" class="img">
+							<img src="img/erweima.png" class="img">
 						</div>
 						<div class="bg">
 						</div>
-						<div class="desc mismText">可长按二维码识别关注</div>
+						<div class="desc mismText">可长按二维码识别添加</div>
 					</div>
 				</div>
 			</div>
@@ -96,7 +96,7 @@
 			}
 
 			$("#url_address").html(sessionStorage.getItem('shareCode'))
-
+			$("#url_div").html('TMT' + sessionStorage.getItem('shareCode'))
 			$("#submit").click(function() {
 				$(".com-pop").addClass('show').show()
 			})
@@ -111,7 +111,7 @@
 			});
 
 			clipboard.on('success', function(e) {
-				alert_("复制成功",closeTip,showPop)
+				alert_("复制成功")
 			});
 
 			clipboard.on('error', function(e) {
